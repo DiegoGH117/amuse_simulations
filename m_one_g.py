@@ -86,7 +86,7 @@ if __name__ == '__main__':
     galaxy1, converter = make_galaxy(o.M_galaxy, o.R_galaxy,
                                                 o.n_halo, o.n_bulge, o.n_disk)
     
-    simulate(galaxy1, converter, int(o.n_bulge), int(o.n_halo), int(o.t_end))
+    simulate(galaxy1, converter, int(o.n_bulge), int(o.n_halo), o.t_end)
     
     """
     for i in numpy.arange(100,800,100):
