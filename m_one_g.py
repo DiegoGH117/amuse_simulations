@@ -38,9 +38,14 @@ def simulate(galaxy1, converter, n_bulge, n_halo, t_end):
     set1 = dynamics.particles.add_particles(galaxy1)
     dynamics.particles.move_to_center()
     
-    disk1 = set1[:n_bulge]#:n_halo]
-
-    make_plot(disk1, "g0myr")
+    disk1 = set1[:n_bulge] # This is just the thin and thick disks #:n_halo]
+    bulge = set1[n_bulge:n_halo] # This is just the bulge
+    disk_and_bulge = set1[:n_halo] # This is everything except dark matter halo
+    
+    # make a plot for each subset
+    make_plot(disk1, "disk_0myr")
+    make_plot(bulge, "bulge_0myr")
+    make_plot(disk_and_bulge, "galaxy_0myr")
     
     sentinel = 1
     
@@ -48,9 +53,13 @@ def simulate(galaxy1, converter, n_bulge, n_halo, t_end):
     # snapshots of different parts of the simulation
     while sentinel*100 <= t_end.value_in(units.Myr):
         
-        # evolve another 100 Myr and save a plot
+        # evolve another 100 Myr
         dynamics.evolve_model(sentinel*100|units.Myr)
-        make_plot(disk1, "g"+str(100*sentinel)+"myr")
+        
+        # make and save the plots
+        make_plot(disk1, "disk_" + str(100*sentinel) + "myr")
+        make_plot(bulge, "bulge_" + str(100*sentinel) + "myr")
+        make_plot(disk_and_bulge, "galaxy_" + str(100*sentinel) + "myr")
         
         # print to the terminal to see progress
         print('Done with t = ' + str(100*sentinel) + ' Myr')
@@ -70,14 +79,14 @@ def new_option_parser():
     result.add_option("-R", unit=units.kpc,
                       dest="R_galaxy", default = 10 | units.kpc,
                       help="Galaxy size [%default]")
-    result.add_option("--n_bulge", dest="n_bulge", default = 50000,
+    result.add_option("--n_bulge", dest="n_bulge", default = 10000,
                       help="number of stars in the bulge [%default]")
-    result.add_option("--n_disk", dest="n_disk", default = 50000,
+    result.add_option("--n_disk", dest="n_disk", default = 10000,
                       help="number of stars in the disk [%default]")
-    result.add_option("--n_halo", dest="n_halo", default = 100000,
+    result.add_option("--n_halo", dest="n_halo", default = 20000,
                       help="number of stars in the halo [%default]")
     result.add_option("--t_end", unit=units.Myr,
-                      dest="t_end", default = 1500|units.Myr,
+                      dest="t_end", default = 2000|units.Myr,
                       help="End of the simulation [%default]")
     return result
 
@@ -87,12 +96,4 @@ if __name__ == '__main__':
                                                 o.n_halo, o.n_bulge, o.n_disk)
     
     simulate(galaxy1, converter, int(o.n_bulge), int(o.n_halo), o.t_end)
-    
-    """
-    for i in numpy.arange(100,800,100):
-        print()
-        print('Starting simulation with t = ' + str(i) + 'Myr')
-        simulate(galaxy1, converter, o.n_bulge, o.n_halo, i|units.Myr)
-        print('Done with simulation with t = ' + str(i) + 'Myr')
-        print()"""
 
