@@ -7,7 +7,7 @@ from prepare_figure import single_frame
 def make_plot(disk1, filename):
     
     # close any open plots
-    plt.close()
+    pyplot.close()
     x_label = "X [kpc]"
     y_label = "Y [kpc]"
     figure = single_frame(x_label, y_label, logy=False, xsize=14, ysize=14)
@@ -15,7 +15,7 @@ def make_plot(disk1, filename):
     pyplot.ylim(-300, 300)
 
     pyplot.scatter(disk1.x.value_in(units.kpc), disk1.y.value_in(units.kpc), 
-                   alpha=1, s=3, lw=0)
+                   alpha=1, s=5, lw=0)
 
     pyplot.savefig('plots/' + filename)
 
@@ -49,7 +49,7 @@ def simulate(galaxy1, converter, n_bulge, n_halo, t_end):
     while sentinel*100 <= t_end.value_in(units.Myr):
         
         # evolve another 100 Myr and save a plot
-        dynamics.evolve_model(100|units.Myr)
+        dynamics.evolve_model(sentinel*100|units.Myr)
         make_plot(disk1, "g"+str(100*sentinel)+"myr")
         
         # print to the terminal to see progress
