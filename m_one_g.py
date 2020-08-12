@@ -70,14 +70,14 @@ def new_option_parser():
     result.add_option("-R", unit=units.kpc,
                       dest="R_galaxy", default = 10 | units.kpc,
                       help="Galaxy size [%default]")
-    result.add_option("--n_bulge", dest="n_bulge", default = 10000,
+    result.add_option("--n_bulge", dest="n_bulge", default = 50000,
                       help="number of stars in the bulge [%default]")
-    result.add_option("--n_disk", dest="n_disk", default = 30000,
+    result.add_option("--n_disk", dest="n_disk", default = 50000,
                       help="number of stars in the disk [%default]")
-    result.add_option("--n_halo", dest="n_halo", default = 60000,
+    result.add_option("--n_halo", dest="n_halo", default = 100000,
                       help="number of stars in the halo [%default]")
     result.add_option("--t_end", unit=units.Myr,
-                      dest="t_end", default = 1000|units.Myr,
+                      dest="t_end", default = 1500|units.Myr,
                       help="End of the simulation [%default]")
     return result
 
