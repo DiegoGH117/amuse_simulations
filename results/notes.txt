@@ -1,0 +1,18 @@
+Notes about this simulation
+
+
+- Values used for creating the initial conditions
+  in GalactICs:
+
+
+Total mass:
+No. of Bulge particles:
+No. of  Disk particles:
+No. of Halo particles:
+Total simulated time:
+
+
+- Interesting results:
+
+
+
