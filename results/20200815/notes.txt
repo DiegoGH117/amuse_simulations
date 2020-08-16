@@ -1,0 +1,20 @@
+Notes about this simulation
+
+
+- Values used for creating the initial conditions
+  in GalactICs:
+
+
+Total mass: 1e12 MSun
+No. of Bulge particles: 10000
+No. of  Disk particles: 10000
+No. of Halo particles: 20000
+Total simulated time: 2000 Myr
+
+
+- Interesting results:
+The main objective was to save the x-y positions in kpc as .csv
+As that is more useful than the scatter plots.
+
+
+
